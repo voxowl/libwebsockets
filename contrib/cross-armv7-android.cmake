@@ -3,7 +3,7 @@
 #
 # This can be used when running cmake in the following way:
 #  cd build/
-#  cmake .. -DCMAKE_TOOLCHAIN_FILE=contrib/cross-aarch64-android.cmake
+#  cmake .. -DCMAKE_TOOLCHAIN_FILE=contrib/cross-armv7-android.cmake
 #
 
 # set(ANDROID_API_VER 24)
@@ -17,7 +17,7 @@ set(BUILD_ARCH linux-x86_64)
 # Rest should be computed from the above
 #
 set(TC_PATH ${NDK}/toolchains/llvm/prebuilt/${BUILD_ARCH})
-set(TC_BASE ${TC_PATH}/bin/${CMAKE_SYSTEM_PROCESSOR}-linux-android)
+set(TC_BASE ${TC_PATH}/bin/${CMAKE_SYSTEM_PROCESSOR}-linux-androideabi)
 set(PLATFORM android)
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_C_COMPILER "${TC_BASE}${ANDROID_API_VER}-clang")
@@ -41,8 +41,8 @@ if (CMAKE_BUILD_TYPE MATCHES RELEASE OR CMAKE_BUILD_TYPE MATCHES Release OR CMAK
 endif()
 
 #-nostdlib
-SET(CMAKE_C_FLAGS "-DGCC_VER=\"\\\"$(GCC_VER)\\\"\" -DARM64=1 -D__LP64__=1 -Os -g3 -fpie -mstrict-align -fPIC -ffunction-sections -fdata-sections -D__ANDROID_API__=${ANDROID_API_VER} -Wno-pointer-sign" CACHE STRING "" FORCE)
-
+# SET(CMAKE_C_FLAGS "-DGCC_VER=\"\\\"$(GCC_VER)\\\"\" -DARM64=1 -D__LP64__=1 -Os -g3 -fpie -mstrict-align -fPIC -ffunction-sections -fdata-sections -D__ANDROID_API__=${ANDROID_API_VER} -Wno-pointer-sign" CACHE STRING "" FORCE)
+SET(CMAKE_C_FLAGS "-DGCC_VER=\"\\\"$(GCC_VER)\\\"\" -Os -g3 -fpie -mstrict-align -fPIC -ffunction-sections -fdata-sections -D__ANDROID_API__=${ANDROID_API_VER} -Wno-pointer-sign" CACHE STRING "" FORCE)
 
 set(CMAKE_FIND_ROOT_PATH "${CROSS_SYSROOT}")
 
